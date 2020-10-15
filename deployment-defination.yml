@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: brighterbee-category-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: brighterbee-api
+      name: category-service
+  template:
+    metadata:
+      name: category-pod
+      labels:
+        app: brighterbee-api
+        name: category-service
+    spec:
+      containers:
+        - name: category-service-container
+          image: patilashwin/category-service:1.0
+          ports:
+            - containerPort: 8000
+          
