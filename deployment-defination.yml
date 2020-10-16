@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: brighterbee-category-deployment
+  name: brighterbee-category-api-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: brighterbee-api
-      name: category-service
+      name: category-service-api
   template:
     metadata:
       name: category-pod
       labels:
         app: brighterbee-api
-        name: category-service
+        name: category-service-api
     spec:
       containers:
         - name: category-service-container
@@ -21,3 +21,15 @@ spec:
           ports:
             - containerPort: 8000
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: category-service
+spec:
+  type: NodePort
+  ports:
+    - port: 8000
+      targetPort: 8000
+  selector:
+    app: brighterbee-api
+    name: category-service-api         
