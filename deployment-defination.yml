@@ -25,12 +25,12 @@ spec:
             httpGet:
               port: serverport
               path: /actuator/health/liveness
-              scheme: http
+              scheme: HTTP
           readinessProbe:
             httpGet:
               port: serverport
               path: /actuator/health/readiness
-              scheme: http
+              scheme: HTTP
       initContainers:
           - name: category-service-init-container
             image: patilashwin/brighterbee-category-init-service:1.0
