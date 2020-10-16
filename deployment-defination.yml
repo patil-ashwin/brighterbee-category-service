@@ -20,7 +20,7 @@ spec:
           image: patilashwin/brighterbee-category-service:1.0
           ports:
             - name: serverport
-              containerPort: 8000
+              containerPort: 8000              
           livenessProbe:            
             httpGet:
               port: serverport
@@ -31,6 +31,13 @@ spec:
               port: serverport
               path: /actuator/health/readiness
               scheme: HTTP
+          resources:
+            requests:
+               memory: "256mi"
+               cpu: "0.5"
+            limits:
+               memory: "512mi"
+               cpu: "0.5"
       initContainers:
           - name: category-service-init-container
             image: patilashwin/brighterbee-category-init-service:1.0
