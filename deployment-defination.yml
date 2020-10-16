@@ -20,6 +20,9 @@ spec:
           image: patilashwin/brighterbee-category-service:1.0
           ports:
             - containerPort: 8000
+      initContainers:
+          - name: category-service-init-container
+            image: patilashwin/brighterbee-category-init-service:1.0
 ---
 apiVersion: v1
 kind: Service
