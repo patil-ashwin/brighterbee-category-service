@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: category-service-container          
-          image: patilashwin/brighterbee-category-service:1.2
+          image: patilashwin/brighterbee-category-service:1.3
           command: ["java" ,"-jar", "category-service.jar", "cmd1", "cmd2"]
           ports:
             - name: serverport
