@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: category-service-container          
-          image: patilashwin/brighterbee-category-service:1.4
+          image: patilashwin/brighterbee-category-service:1.5
           ports:
             - name: serverport
               containerPort: 8000             
@@ -46,6 +46,7 @@ spec:
   ports:
     - port: 8000
       targetPort: 8000
+      nodePort: 32648
   selector:
     app: brighterbee-api
     name: category-service-api
