@@ -19,10 +19,16 @@ spec:
     spec:
       containers:
         - name: category-service-container          
-          image: patilashwin/brighterbee-category-service:1.5
+          image: patilashwin/brighterbee-category-service:1.6
           ports:
             - name: serverport
-              containerPort: 8000             
+              containerPort: 8000           
+          env:
+           - name: app-name
+             valueFrom:
+              configMapKeyRef:
+                key: app
+                name: brighterbee-category-service
           livenessProbe:            
             httpGet:
               port: serverport
@@ -33,9 +39,13 @@ spec:
               port: serverport
               path: /actuator/health/readiness
               scheme: HTTP
-      initContainers:
-        - name: category-service-init-container
-          image: patilashwin/brighterbee-category-init-service:1.0
+          volumeMounts:
+            - name: config-vol
+              mountPath: /vol-mnt
+      volumes:
+        - name: config-vol
+          configMap:
+            name: brighterbee-category-service
 ---
 apiVersion: v1
 kind: Service
