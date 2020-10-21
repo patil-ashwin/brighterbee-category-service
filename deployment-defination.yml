@@ -19,13 +19,10 @@ spec:
     spec:
       containers:
         - name: category-service-container          
-          image: patilashwin/brighterbee-category-service:1.6
+          image: patilashwin/brighterbee-category-service:1.7
           ports:
             - name: serverport
               containerPort: 8000
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "development" 
           livenessProbe:            
             httpGet:
               port: serverport
@@ -39,10 +36,16 @@ spec:
           volumeMounts:
             - name: config-vol
               mountPath: /vol-mnt
+            - name: vol-pd
+              mountPath: /vol-tst
       volumes:
         - name: config-vol
           configMap:
             name: brighterbee-category-service
+        - name: vol-pd
+          gcePersistentDisk:
+              pdName: mysql-persistent-disk
+              fsType: ext4
 ---
 apiVersion: v1
 kind: Service
